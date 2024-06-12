@@ -1,0 +1,21 @@
+name: Release version
+
+on:
+  workflow_dispatch:
+    inputs:
+        environment:
+          description: 'Version to release'
+          required: true
+          default: 'patch'
+          type: choice
+          options:
+            - patch
+            - minor
+            - major
+
+jobs:
+  manual_trigger_job:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
