@@ -3,7 +3,7 @@ name: Release version
 on:
   workflow_dispatch:
     inputs:
-        environment:
+        version:
           description: 'Version to release'
           required: true
           default: 'patch'
@@ -28,3 +28,16 @@ jobs:
           key: ${{ runner.os }}-poetry-${{ hashFiles('poetry.lock') }}
       - run: poetry install
       - run: poetry run pytest
+      - run: |
+          VERSION=$(poetry version ${{ github.event.inputs.version }} --short)
+          echo "version=${VERSION}" >> "$GITHUB_OUTPUT"
+        id: bump_version
+        
+      - run: poetry build
+      - run: poetry publish
+        env:
+          POETRY_PYPI_TOKEN: ${{ secrets.PYPI_TOKEN }}
+      - run: git tag ${{ steps.bump_version.outputs.version }}
+      - run: git add pyproject.toml
+      - run: git commit -m "Release ${{ steps.bump_version.outputs.version }} [skip ci]"
+      - run: git push origin main --tags
