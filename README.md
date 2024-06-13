@@ -6,9 +6,17 @@
 pip install ct-lib
 ```
 
+or with poetry:
+
+```bash
+poetry add ct-lib
+```
+
 ## Usage
 
 ### Login
+
+#### Step 1: Generate login URL and redirect user to it
 
 ```python
 from ct_lib.og_wallet import OgWallet, GenerateLoginUrlResponse, AuthenticateResponse
@@ -34,12 +42,14 @@ if not isinstance(response, GenerateLoginUrlResponse):
     exit(1)
 
 login_url = response["url"]
+# redirect user to login_url...
+```
 
-# redirect user to login_url
-# ... user logs in and authorizes scopes ...
-# user is redirected back to the callback URL with the auth token
-#
-# the following code should be in the callback URL controller/handler
+The user now logs in and authorizes the scopes. The user is then redirected back to the callback URL with the auth token.
+
+#### Step 2: Handle login callback
+
+```python
 from django.http import HttpResponse
 from ct_lib.og_wallet import OgWallet, GenerateLoginUrlResponse, AuthenticateResponse
 
