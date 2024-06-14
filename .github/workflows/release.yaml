@@ -33,11 +33,17 @@ jobs:
           echo "version=${VERSION}" >> "$GITHUB_OUTPUT"
         id: bump_version
         
-      - run: poetry build
-      - run: poetry publish
+      - run: poetry publish -r testpypi --build
         env:
-          POETRY_PYPI_TOKEN: ${{ secrets.PYPI_TOKEN }}
+          POETRY_PYPI_TOKEN: ${{ secrets.TEST_PYPI_TOKEN }}
       - run: git tag ${{ steps.bump_version.outputs.version }}
       - run: git add pyproject.toml
       - run: git commit -m "Release ${{ steps.bump_version.outputs.version }} [skip ci]"
       - run: git push origin main --tags
+      - run: |
+          PRE_RELEASE_VERSION=$(poetry version prerelease --short)
+          echo "pre_release_version=${PRE_RELEASE_VERSION}" >> "$GITHUB_OUTPUT"
+        id: bump_version_prerelease
+      - run: git add pyproject.toml
+      - run: git commit -m "Setting prerelease version ${{ steps.bump_version_prerelease.outputs.pre_release_version }}"
+      - run: git push origin main
