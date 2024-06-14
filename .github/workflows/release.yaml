@@ -14,7 +14,8 @@ on:
             - major
 
 jobs:
-  manual_trigger_job:
+  release_version:
+    name: Release version
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
