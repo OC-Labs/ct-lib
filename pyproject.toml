@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "ct-lib"
-version = "0.1.1"
+version = "0.1.3a0"
 description = ""
 authors = ["Angel R. L. <angel.delriolobato@onchainlabs.ch>", "Pedro B. <pedro.barrera@onchainlabs.ch>"]
 readme = "README.md"
