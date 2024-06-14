@@ -32,10 +32,13 @@ jobs:
           VERSION=$(poetry version ${{ github.event.inputs.version }} --short)
           echo "version=${VERSION}" >> "$GITHUB_OUTPUT"
         id: bump_version
-        
-      - run: poetry publish -r testpypi --build
+      - run: poetry config repositories.testpypi https://test.pypi.org/simple
+      - run: poetry config pypi-token.testpypi $PYPI_TOKEN
         env:
-          POETRY_PYPI_TOKEN: ${{ secrets.TEST_PYPI_TOKEN }}
+          PYPI_TOKEN: ${{ secrets.TEST_PYPI_TOKEN }}
+
+      - run: poetry publish -r testpypi --build
+
       - run: git tag ${{ steps.bump_version.outputs.version }}
       - run: git add pyproject.toml poetry.lock
       - run: git commit -m "Release ${{ steps.bump_version.outputs.version }} [skip ci]"

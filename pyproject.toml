@@ -22,8 +22,3 @@ build-backend = "poetry.core.masonry.api"
 name = "pypi"
 priority = "primary"
 
-[[tool.poetry.source]]
-name = "testpypi"
-url = "https://test.pypi.org/simple/"
-priority = "explicit"
-
