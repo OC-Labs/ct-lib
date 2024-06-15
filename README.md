@@ -19,7 +19,7 @@ poetry add ogwallet-ct-lib
 #### Step 1: Generate login URL and redirect user to it
 
 ```python
-from ct_lib.og_wallet import OgWallet, GenerateLoginUrlResponse, AuthenticateResponse
+from ogwallet_ct_lib.og_wallet import OgWallet, GenerateLoginUrlResponse, AuthenticateResponse
 
 base_url = "https://www.example.com/api/v1"
 client_id = "client_id"
@@ -51,7 +51,7 @@ The user now logs in and authorizes the scopes. The user is then redirected back
 
 ```python
 from django.http import HttpResponse
-from ct_lib.og_wallet import OgWallet, GenerateLoginUrlResponse, AuthenticateResponse
+from ogwallet_ct_lib.og_wallet import OgWallet, GenerateLoginUrlResponse, AuthenticateResponse
 
 og_wallet = OgWallet(base_url, client_id, client_secret)
 
