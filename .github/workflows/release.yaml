@@ -40,8 +40,7 @@ jobs:
           VERSION=$(poetry version ${{ github.event.inputs.version }} --short)
           echo "version=${VERSION}" >> "$GITHUB_OUTPUT"
         id: bump_version
-      - run: poetry config repositories.testpypi https://test.pypi.org/legacy/
-      - run: poetry config pypi-token.testpypi $PYPI_TOKEN
+      - run: poetry config pypi-token.pypi $PYPI_TOKEN
         env:
           PYPI_TOKEN: ${{ secrets.PYPI_TOKEN }}
 
