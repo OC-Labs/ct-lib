@@ -1,5 +1,5 @@
 from pytest_httpserver import HTTPServer
-from ct_lib.og_wallet import OgWallet, GenerateLoginUrlResponse, AuthenticateResponse
+from ogwallet_ct_lib.og_wallet import OgWallet, GenerateLoginUrlResponse, AuthenticateResponse
 from urllib.parse import quote
 import pytest
 
