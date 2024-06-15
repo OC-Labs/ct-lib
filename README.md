@@ -3,13 +3,13 @@
 ## Installation
 
 ```bash
-pip install ct-lib
+pip install ogwallet-ct-lib
 ```
 
 or with poetry:
 
 ```bash
-poetry add ct-lib
+poetry add ogwallet-ct-lib
 ```
 
 ## Usage
