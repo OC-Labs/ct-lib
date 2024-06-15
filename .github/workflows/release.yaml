@@ -43,9 +43,9 @@ jobs:
       - run: poetry config repositories.testpypi https://test.pypi.org/legacy/
       - run: poetry config pypi-token.testpypi $PYPI_TOKEN
         env:
-          PYPI_TOKEN: ${{ secrets.TEST_PYPI_TOKEN }}
+          PYPI_TOKEN: ${{ secrets.PYPI_TOKEN }}
 
-      - run: poetry publish -r testpypi --build
+      - run: poetry publish -r pypi --build
 
       - run: git tag ${{ steps.bump_version.outputs.version }}
       - run: git add pyproject.toml poetry.lock
